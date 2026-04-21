@@ -13,15 +13,19 @@ async function sharePage(btn) {
   if (navigator.share) {
     try {
       await navigator.share(data);
-    } catch {}
-  } else {
-    const message = `🐱 Ajude a Sasá!\n\n${data.text}\n\n👉 ${data.url}`;
-    navigator.clipboard.writeText(message).then(() => {
-      const original = btn.innerHTML;
-      btn.textContent = "✅ Mensagem copiada!";
-      setTimeout(() => (btn.innerHTML = original), 2000);
-    });
+      return;
+    } catch (err) {
+      if (err.name === "AbortError") return;
+      // share falhou por outro motivo — cai no fallback abaixo
+    }
   }
+
+  const message = `🐱 Ajude a Sasá!\n\n${data.text}\n\n👉 ${data.url}`;
+  navigator.clipboard.writeText(message).then(() => {
+    const original = btn.innerHTML;
+    btn.textContent = "✅ Mensagem copiada!";
+    setTimeout(() => (btn.innerHTML = original), 2000);
+  });
 }
 
 function copyPixKey(btn) {

@@ -93,7 +93,8 @@ body {
   margin-bottom: 6px;
 }
 
-.title span {
+.title span,
+p > strong {
   color: #f4845f;
 }
 
@@ -130,7 +131,7 @@ body {
 .cause-box .cause-title {
   font-family: "Fredoka", sans-serif;
   font-weight: 600;
-  font-size: 14px;
+  font-size: 18px;
   color: #f4845f;
   margin-bottom: 6px;
   display: flex;
@@ -140,14 +141,8 @@ body {
 
 .cause-body {
   display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-@media (max-width: 400px) {
-  .cause-body {
-    flex-direction: column;
-  }
+  flex-direction: column;
+  gap: 10px;
 }
 
 .cause-box p {
@@ -155,35 +150,24 @@ body {
   color: #5a4636;
   line-height: 1.6;
   text-align: justify;
-  flex: 1;
 }
 
 .cause-photos {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   gap: 8px;
-  flex-shrink: 0;
+  margin-top: 4px;
+  justify-content: space-evenly;
 }
 
 .cat-photo-cause {
-  width: 110px;
-  height: 110px;
-  border-radius: 12px;
+  flex: 1;
+  min-width: 0;
+  aspect-ratio: 1;
   object-fit: cover;
+  border-radius: 12px;
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
   border: 2px solid #f4845f;
-}
-
-@media (max-width: 400px) {
-  .cause-photos {
-    flex-direction: row;
-  }
-
-  .cat-photo-cause {
-    width: 100%;
-    height: 130px;
-    border-radius: 10px;
-  }
 }
 
 .info-grid {
@@ -462,6 +446,30 @@ body {
   background: #f0e4d4;
 }
 
+.draw-rules {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 4px;
+}
+
+.draw-rules li {
+  font-size: 13px;
+  color: #5a4636;
+  line-height: 1.5;
+  padding-left: 14px;
+  position: relative;
+}
+
+.draw-rules li::before {
+  content: "›";
+  position: absolute;
+  left: 0;
+  color: #f4845f;
+  font-weight: 700;
+}
+
 .contact-section {
   text-align: center;
   padding-top: 4px;
@@ -497,7 +505,9 @@ body {
   padding: 9px 22px;
   border-radius: 30px;
   box-shadow: 0 3px 10px rgba(37, 211, 102, 0.4);
-  transition: transform 0.15s, box-shadow 0.15s;
+  transition:
+    transform 0.15s,
+    box-shadow 0.15s;
 }
 
 .contact-section .contact-note:hover {
@@ -529,7 +539,9 @@ body {
   font-size: 15px;
   font-weight: 600;
   cursor: pointer;
-  transition: transform 0.15s, box-shadow 0.15s;
+  transition:
+    transform 0.15s,
+    box-shadow 0.15s;
   box-shadow: 0 3px 10px rgba(102, 126, 234, 0.35);
 }
 
@@ -553,7 +565,9 @@ body {
   font-size: 15px;
   font-weight: 600;
   cursor: pointer;
-  transition: transform 0.15s, box-shadow 0.15s;
+  transition:
+    transform 0.15s,
+    box-shadow 0.15s;
   box-shadow: 0 3px 10px rgba(244, 132, 95, 0.35);
 }
 
@@ -580,6 +594,16 @@ body {
   color: #e85d4a;
 }
 
+@media (max-width: 600px) {
+  .cause-photos {
+    flex-direction: column;
+  }
+
+  .info-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 @media (min-width: 600px) {
   .header {
     padding: 40px 36px 28px;
@@ -598,20 +622,8 @@ body {
     padding: 24px 36px 36px;
   }
 
-  .cause-body {
-    flex-direction: column;
-  }
-
-  .cause-photos {
-    flex-direction: row;
-    justify-content: center;
-  }
-
   .cat-photo-cause {
-    flex: 0 0 160px;
-    width: 160px;
-    height: 160px;
-    border-radius: 12px;
+    max-width: 200px;
   }
 
   .info-item .value {
