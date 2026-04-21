@@ -3,6 +3,82 @@ const TOTAL_NUMBERS = 150;
 const SHEET_CSV_URL =
   "https://docs.google.com/spreadsheets/d/e/2PACX-1vTzd87DbYnIeAOb8FhXs-MjUTRMZD0F0LFOg6JHIWATVWiC4v5ICOOvi1CkovXBbdcqa9MQ7mGnijcw/pub?gid=2065313540&single=true&output=csv";
 
+const selectedNumbers = new Set();
+
+function buildWhatsAppMessage() {
+  if (selectedNumbers.size === 0) {
+    return "Olá! Gostaria muito de ajudar a Sasá!\nMeu número da sorte é ___ e meu nome completo é _____.\nAbaixo vou enviar o comprovante de transferência.";
+  }
+
+  const sorted = [...selectedNumbers].sort((a, b) => a - b);
+  const count = selectedNumbers.size;
+  const total = count * 10;
+
+  if (count === 1) {
+    return `Olá! Gostaria muito de ajudar a Sasá!\nMeu número da sorte é ${sorted[0]} e meu nome completo é _____.\nAbaixo vou enviar o comprovante de transferência.`;
+  }
+
+  return `Olá! Gostaria muito de ajudar a Sasá!\nMeus números da sorte são ${sorted.join(", ")} (${count} números — R$\u00a0${total}) e meu nome completo é _____.\nAbaixo vou enviar o comprovante de transferência.`;
+}
+
+function updateWhatsAppButton() {
+  const btn = document.getElementById("whatsapp-btn");
+  if (!btn) return;
+  btn.href =
+    "https://wa.me/5588999173315?text=" +
+    encodeURIComponent(buildWhatsAppMessage());
+  btn.classList.toggle("has-selection", selectedNumbers.size > 0);
+}
+
+function updateSelectionUI() {
+  const counter = document.getElementById("selection-counter");
+  if (!counter) return;
+
+  const count = selectedNumbers.size;
+
+  if (count === 0) {
+    counter.style.display = "none";
+  } else {
+    counter.style.display = "flex";
+    const sorted = [...selectedNumbers].sort((a, b) => a - b);
+    const total = count * 10;
+    const plural = count > 1;
+
+    document.getElementById("selection-label").textContent = plural
+      ? `${count} números selecionados`
+      : "1 número selecionado";
+    document.getElementById("selection-numbers-list").textContent =
+      sorted.join(", ");
+    document.getElementById(
+      "selection-total"
+    ).textContent = `Total: R$ ${total}`;
+  }
+
+  updateWhatsAppButton();
+}
+
+function toggleNumber(num) {
+  const cell = document.querySelector(`.number-cell[data-num="${num}"]`);
+  if (!cell || cell.classList.contains("sold")) return;
+
+  if (selectedNumbers.has(num)) {
+    selectedNumbers.delete(num);
+    cell.classList.remove("selected");
+  } else {
+    selectedNumbers.add(num);
+    cell.classList.add("selected");
+  }
+  updateSelectionUI();
+}
+
+function clearSelection() {
+  selectedNumbers.clear();
+  document
+    .querySelectorAll(".number-cell.selected")
+    .forEach((c) => c.classList.remove("selected"));
+  updateSelectionUI();
+}
+
 async function sharePage(btn) {
   const data = {
     title: "Rifa Solidária — Ajude a Sasá! 🐱",
@@ -16,7 +92,6 @@ async function sharePage(btn) {
       return;
     } catch (err) {
       if (err.name === "AbortError") return;
-      // share falhou por outro motivo — cai no fallback abaixo
     }
   }
 
@@ -40,21 +115,47 @@ function copyPixKey(btn) {
 function parseSoldNumbers(csvText) {
   return csvText
     .split("\n")
-    .map(line => parseInt(line.trim(), 10))
-    .filter(n => !isNaN(n));
+    .map((line) => parseInt(line.trim(), 10))
+    .filter((n) => !isNaN(n));
 }
 
 function renderNumbersGrid(soldNumbers) {
   const grid = document.getElementById("numbers-grid");
   if (!grid) return;
 
+  // Remove from selection any number that became sold
+  soldNumbers.forEach((n) => selectedNumbers.delete(n));
+
   grid.innerHTML = "";
   for (let i = 1; i <= TOTAL_NUMBERS; i++) {
+    const isSold = soldNumbers.includes(i);
+    const isSelected = selectedNumbers.has(i);
+
     const cell = document.createElement("div");
-    cell.className = "number-cell" + (soldNumbers.includes(i) ? " sold" : "");
+    cell.className =
+      "number-cell" +
+      (isSold ? " sold" : "") +
+      (isSelected ? " selected" : "");
+    cell.dataset.num = i;
     cell.textContent = i;
+
+    if (!isSold) {
+      cell.setAttribute("role", "button");
+      cell.setAttribute("tabindex", "0");
+      cell.setAttribute("aria-label", `Número ${i}`);
+      cell.addEventListener("click", () => toggleNumber(i));
+      cell.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          toggleNumber(i);
+        }
+      });
+    }
+
     grid.appendChild(cell);
   }
+
+  updateSelectionUI();
 }
 
 async function loadSoldNumbers() {
@@ -77,6 +178,7 @@ async function loadSoldNumbers() {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
+  updateWhatsAppButton();
   loadSoldNumbers();
   setInterval(loadSoldNumbers, 60_000); // a cada 1 minuto
 });

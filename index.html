@@ -81,15 +81,15 @@
           <div class="how-to-steps">
             <div class="how-to-step">
               <div class="step-number">1</div>
-              <div class="step-text">Escolha um número disponível abaixo</div>
+              <div class="step-text">Clique em um ou mais números disponíveis abaixo para selecioná-los</div>
             </div>
             <div class="how-to-step">
               <div class="step-number">2</div>
-              <div class="step-text">Faça o PIX de <strong>R$&nbsp;10</strong> para a chave abaixo</div>
+              <div class="step-text">Faça o PIX de <strong>R$&nbsp;10 por número</strong> para a chave abaixo</div>
             </div>
             <div class="how-to-step">
               <div class="step-number">3</div>
-              <div class="step-text">Envie o comprovante pelo WhatsApp com seu nome e número escolhido</div>
+              <div class="step-text">Clique em <strong>"Enviar comprovante"</strong> — os números escolhidos já estarão na mensagem. Adicione seu nome e envie!</div>
             </div>
           </div>
         </div>
@@ -107,9 +107,18 @@
           <div class="numbers-title">🎟️ Números da Rifa</div>
           <div class="numbers-legend">
             <span class="legend-item legend-available">Disponível</span>
+            <span class="legend-item legend-selected">Selecionado</span>
             <span class="legend-item legend-sold">Vendido</span>
           </div>
           <div id="numbers-grid"></div>
+          <div id="selection-counter" class="selection-counter" style="display:none">
+            <div class="selection-header">
+              <span id="selection-label" class="selection-label"></span>
+              <button class="selection-clear-btn" onclick="clearSelection()">✕ Limpar</button>
+            </div>
+            <div id="selection-numbers-list" class="selection-numbers-list"></div>
+            <div id="selection-total" class="selection-total"></div>
+          </div>
         </div>
 
         <div class="draw-section">
@@ -156,9 +165,11 @@
               📋 Copiar chave Pix
             </button>
             <a
+              id="whatsapp-btn"
               class="contact-note"
               href="https://wa.me/5588999173315?text=Ol%C3%A1!%20Gostaria%20muito%20de%20ajudar%20a%20Sas%C3%A1!%0AMeu%20n%C3%BAmero%20da%20sorte%20%C3%A9%20___%20e%20meu%20nome%20completo%20%C3%A9%20_____.%0AAbaixo%20vou%20enviar%20o%20comprovante%20de%20transfer%C3%AAncia."
               target="_blank"
+              rel="noopener"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -183,7 +194,12 @@
       <div class="footer-strip">
         Obrigado(a) por ajudar! <span class="heart">♥</span> Cada gesto faz
         diferença!<br/>Compartilhe com os amigos!
-      </br>
+        <div class="footer-credit">
+          Desenvolvido por <a href="https://github.com/thalesrochas" target="_blank" rel="noopener" class="footer-credit-link">Thales Rocha</a>
+        </div>
+      </div>
     </div>
+  </body>
+</html>
   </body>
 </html>
