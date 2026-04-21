@@ -518,6 +518,30 @@ body {
   flex-wrap: wrap;
 }
 
+.share-btn {
+  margin-top: 0;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: white;
+  border: none;
+  border-radius: 30px;
+  padding: 8px 22px;
+  font-family: "Fredoka", sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.15s, box-shadow 0.15s;
+  box-shadow: 0 3px 10px rgba(102, 126, 234, 0.35);
+}
+
+.share-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 14px rgba(102, 126, 234, 0.45);
+}
+
+.share-btn:active {
+  transform: translateY(0);
+}
+
 .pix-copy-btn {
   margin-top: 0;
   background: linear-gradient(135deg, #f4845f, #f9a870);

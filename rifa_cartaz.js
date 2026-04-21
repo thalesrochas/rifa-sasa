@@ -3,6 +3,27 @@ const TOTAL_NUMBERS = 150;
 const SHEET_CSV_URL =
   "https://docs.google.com/spreadsheets/d/e/2PACX-1vTzd87DbYnIeAOb8FhXs-MjUTRMZD0F0LFOg6JHIWATVWiC4v5ICOOvi1CkovXBbdcqa9MQ7mGnijcw/pub?gid=2065313540&single=true&output=csv";
 
+async function sharePage(btn) {
+  const data = {
+    title: "Rifa Solidária — Ajude a Sasá! 🐱",
+    text: "Nossa gatinha precisou de cirurgia de emergência e estamos fazendo uma rifa para cobrir os custos. Concorra a um Cubo Mágico 3x3 por apenas R$ 10. Toda ajuda é bem-vinda! 🙏",
+    url: "https://thalesrochas.github.io/rifa-sasa",
+  };
+
+  if (navigator.share) {
+    try {
+      await navigator.share(data);
+    } catch {}
+  } else {
+    const message = `🐱 Ajude a Sasá!\n\n${data.text}\n\n👉 ${data.url}`;
+    navigator.clipboard.writeText(message).then(() => {
+      const original = btn.innerHTML;
+      btn.textContent = "✅ Mensagem copiada!";
+      setTimeout(() => (btn.innerHTML = original), 2000);
+    });
+  }
+}
+
 function copyPixKey(btn) {
   navigator.clipboard.writeText(PIX_KEY).then(() => {
     btn.textContent = "✅ Chave copiada!";
