@@ -177,8 +177,18 @@ async function loadSoldNumbers() {
   }
 }
 
+function initPrizeCarousel() {
+  const track = document.querySelector(".prize-gallery-track");
+  if (!track) return;
+  const count = track.querySelectorAll(".prize-photo").length;
+  if (count < 2) return;
+  track.innerHTML += track.innerHTML;
+  track.style.animationDuration = `${count * 2.5}s`;
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   updateWhatsAppButton();
   loadSoldNumbers();
+  initPrizeCarousel();
   setInterval(loadSoldNumbers, 60_000); // a cada 1 minuto
 });

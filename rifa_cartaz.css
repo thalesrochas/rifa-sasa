@@ -276,8 +276,45 @@ p > strong {
   padding: 18px 20px;
   margin-bottom: 20px;
   display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.prize-header {
+  display: flex;
   align-items: center;
   gap: 16px;
+}
+
+.prize-gallery {
+  overflow: hidden;
+  border-radius: 10px;
+}
+
+.prize-gallery:hover .prize-gallery-track {
+  animation-play-state: paused;
+}
+
+.prize-gallery-track {
+  display: flex;
+  gap: 8px;
+  width: max-content;
+  animation: prize-scroll linear infinite;
+}
+
+@keyframes prize-scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.prize-photo {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 10px;
+  border: 2px solid rgba(249, 200, 138, 0.4);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+  flex-shrink: 0;
 }
 
 .prize-icon {
