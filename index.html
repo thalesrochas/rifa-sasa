@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rifa Solidária</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Quicksand:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="rifa_cartaz.css" />
+    <script src="rifa_cartaz.js" defer></script>
+  </head>
+  <body>
+    <div class="card">
+      <div class="header">
+        <div class="paw-prints">🐾🐾</div>
+        <div class="paw-prints-left">🐾</div>
+        <div class="badge">Rifa Solidária</div>
+        <div class="title">Ajude a <span>Sasá</span> 🐱</div>
+        <div class="subtitle">
+          Cada número conta! Sua ajuda faz a diferença.
+        </div>
+        <img src="foto1.jpg" alt="Sasá" class="cat-photo-header" />
+      </div>
+
+      <div class="body">
+        <div class="cause-box">
+          <div class="cause-title">❤️ Por que estamos fazendo essa rifa?</div>
+          <div class="cause-body">
+            <p>
+              Nossa gatinha precisou passar por mais uma cirurgia de emergência e
+              as despesas médicas ficaram bem altas. Estamos organizando essa rifa
+              para conseguir cobrir os custos do tratamento dela. Toda ajuda é
+              muito bem-vinda! 🙏
+            </p>
+            <div class="cause-photos">
+              <img src="foto2.jpg" alt="Sasá com uma sonda" class="cat-photo-cause" />
+              <img src="foto3.jpg" alt="Sasá se recuperando" class="cat-photo-cause" />
+            </div>
+          </div>
+        </div>
+
+        <div class="info-grid">
+          <div class="info-item">
+            <div class="icon">🔢</div>
+            <div class="label">Números</div>
+            <div class="value">150</div>
+          </div>
+          <div class="info-item">
+            <div class="icon">💰</div>
+            <div class="label">Cada número</div>
+            <div class="value highlight">R$ 10</div>
+          </div>
+        </div>
+
+        <div class="how-to-section">
+          <div class="how-to-title">📋 Como participar</div>
+          <div class="how-to-steps">
+            <div class="how-to-step">
+              <div class="step-number">1</div>
+              <div class="step-text">Escolha um número disponível abaixo</div>
+            </div>
+            <div class="how-to-step">
+              <div class="step-number">2</div>
+              <div class="step-text">Faça o PIX de <strong>R$&nbsp;10</strong> para a chave abaixo</div>
+            </div>
+            <div class="how-to-step">
+              <div class="step-number">3</div>
+              <div class="step-text">Envie o comprovante pelo WhatsApp com seu nome e número escolhido</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="prize-box">
+          <div class="prize-icon">🧩</div>
+          <div class="prize-info">
+            <div class="prize-label">🏆 Prêmio</div>
+            <div class="prize-name">Um Cubo Mágico 3x3 Profissional</div>
+            <div class="prize-name small">Envio para todo o Brasil</div>
+          </div>
+        </div>
+
+        <div class="numbers-section">
+          <div class="numbers-title">🎟️ Números da Rifa</div>
+          <div class="numbers-legend">
+            <span class="legend-item legend-available">Disponível</span>
+            <span class="legend-item legend-sold">Vendido</span>
+          </div>
+          <div id="numbers-grid"></div>
+        </div>
+
+        <div class="draw-section">
+          <div class="draw-title">🎲 Como será o sorteio?</div>
+          <div class="draw-info">
+            <div class="draw-item">
+              <span class="draw-label">Quando</span>
+              <span class="draw-value">Assim que todos os números forem vendidos</span>
+            </div>
+            <div class="draw-divider"></div>
+            <div class="draw-item">
+              <span class="draw-label">Formato</span>
+              <span class="draw-value draw-tbd">A definir — será anunciado em breve 📢</span>
+            </div>
+            <div class="draw-divider"></div>
+            <div class="draw-item">
+              <span class="draw-label">Como saber se eu ganhei?</span>
+              <span class="draw-value">Você será avisado pelo WhatsApp que usou para enviar o comprovante. Seus dados de entrega serão solicitados na hora. O resultado também será anunciado aqui! 🎉</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="contact-section">
+          <div class="contact-label">Pix / Contato</div>
+          <div class="contact-info">Francisco Thales Rocha Sousa</div>
+          <div class="contact-info">📱 (88) 99917-3315</div>
+          <div class="contact-info">🏦 Nubank</div>
+          <div class="contact-buttons">
+            <button class="pix-copy-btn" onclick="copyPixKey(this)">
+              📋 Copiar chave Pix
+            </button>
+            <a
+              class="contact-note"
+              href="https://wa.me/5588999173315?text=Ol%C3%A1!%20Gostaria%20muito%20de%20ajudar%20a%20Sas%C3%A1!%0AMeu%20n%C3%BAmero%20da%20sorte%20%C3%A9%20___%20e%20meu%20nome%20completo%20%C3%A9%20_____.%0AAbaixo%20vou%20enviar%20o%20comprovante%20de%20transfer%C3%AAncia."
+              target="_blank"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="white"
+              >
+                <path
+                  d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"
+                />
+              </svg>
+              Enviar comprovante
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-strip">
+        Obrigado(a) por ajudar! <span class="heart">♥</span> Cada gesto faz
+        diferença!<br/>Compartilhe com os amigos!
+      </br>
+    </div>
+  </body>
+</html>
