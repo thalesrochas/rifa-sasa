@@ -49,9 +49,8 @@ function updateSelectionUI() {
       : "1 número selecionado";
     document.getElementById("selection-numbers-list").textContent =
       sorted.join(", ");
-    document.getElementById(
-      "selection-total"
-    ).textContent = `Total: R$ ${total}`;
+    document.getElementById("selection-total").textContent =
+      `Total: R$ ${total}`;
   }
 
   updateWhatsAppButton();
@@ -75,14 +74,14 @@ function clearSelection() {
   selectedNumbers.clear();
   document
     .querySelectorAll(".number-cell.selected")
-    .forEach((c) => c.classList.remove("selected"));
+    .forEach(c => c.classList.remove("selected"));
   updateSelectionUI();
 }
 
 async function sharePage(btn) {
   const data = {
-    title: "Rifa Solidária — Ajude a Sasá! 🐱",
-    text: "Nossa gatinha precisou de cirurgia de emergência e estamos fazendo uma rifa para cobrir os custos. Concorra a um Cubo Mágico 3x3 por apenas R$ 10. Toda ajuda é bem-vinda! 🙏",
+    title: "🐱 Rifa Solidária — Ajude a Sasá!",
+    text: "Nossa gatinha foi diagnosticada com doença renal crônica e precisou de uma cirurgia de emergência que ultrapassou R$ 10.000. Ela já está em casa se recuperando, mas precisamos de uma forcinha! 🙏\n🔢 150 números • 💰 R$ 10 cada\n🏆 Prêmio: Cubo Mágico 7x7 Moyu Meilong V2M Magnético\n👇 Acesse, escolha seu número e faça o Pix:\n\n🔗 thalesrochas.github.io/rifa-sasa\n🔗 thalesrochas.github.io/rifa-sasa\n🔗 thalesrochas.github.io/rifa-sasa\n\nCompartilhe com os amigos! Cada número ajuda muito. 🐾♥️",
     url: "https://thalesrochas.github.io/rifa-sasa",
   };
 
@@ -115,8 +114,8 @@ function copyPixKey(btn) {
 function parseSoldNumbers(csvText) {
   return csvText
     .split("\n")
-    .map((line) => parseInt(line.trim(), 10))
-    .filter((n) => !isNaN(n));
+    .map(line => parseInt(line.trim(), 10))
+    .filter(n => !isNaN(n));
 }
 
 function renderNumbersGrid(soldNumbers) {
@@ -124,7 +123,7 @@ function renderNumbersGrid(soldNumbers) {
   if (!grid) return;
 
   // Remove from selection any number that became sold
-  soldNumbers.forEach((n) => selectedNumbers.delete(n));
+  soldNumbers.forEach(n => selectedNumbers.delete(n));
 
   grid.innerHTML = "";
   for (let i = 1; i <= TOTAL_NUMBERS; i++) {
@@ -133,9 +132,7 @@ function renderNumbersGrid(soldNumbers) {
 
     const cell = document.createElement("div");
     cell.className =
-      "number-cell" +
-      (isSold ? " sold" : "") +
-      (isSelected ? " selected" : "");
+      "number-cell" + (isSold ? " sold" : "") + (isSelected ? " selected" : "");
     cell.dataset.num = i;
     cell.textContent = i;
 
@@ -144,7 +141,7 @@ function renderNumbersGrid(soldNumbers) {
       cell.setAttribute("tabindex", "0");
       cell.setAttribute("aria-label", `Número ${i}`);
       cell.addEventListener("click", () => toggleNumber(i));
-      cell.addEventListener("keydown", (e) => {
+      cell.addEventListener("keydown", e => {
         if (e.key === "Enter" || e.key === " ") {
           e.preventDefault();
           toggleNumber(i);
