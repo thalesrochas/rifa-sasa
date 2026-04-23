@@ -167,7 +167,6 @@ async function loadSoldNumbers() {
     const url = `${SHEET_CSV_URL}&t=${Date.now()}`;
     const res = await fetch(url, { redirect: "follow", cache: "no-store" });
     const text = await res.text();
-    console.log(text);
     renderNumbersGrid(parseSoldNumbers(text));
   } catch {
     renderNumbersGrid([]);
