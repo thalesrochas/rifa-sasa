@@ -31,7 +31,9 @@ Esta página foi criada para organizar a rifa e facilitar a participação de qu
 | Valor por número | R$ 10 |
 | Prêmio | Cubo Mágico 7×7 Moyu Meilong V2M Magnético |
 | Envio | Para todo o Brasil |
+| Data do sorteio | 30/08/2026 — último concurso da Loteria Federal do mês |
 | Sorteio | Loteria Federal — 3 últimos dígitos do 1º prêmio |
+| Números não vendidos | Ficam fora da apuração (segue para o prêmio seguinte) |
 
 O participante escolhe um ou mais números na página, realiza o PIX e envia o comprovante via WhatsApp com os números já pré-preenchidos na mensagem.
 

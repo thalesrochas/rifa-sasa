@@ -170,6 +170,109 @@ p > strong {
   border: 2px solid #f4845f;
 }
 
+.announce-box {
+  background: linear-gradient(135deg, #f4845f, #f9a870);
+  border-radius: 18px;
+  padding: 18px 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 6px 20px rgba(244, 132, 95, 0.28);
+  position: relative;
+  overflow: hidden;
+}
+
+.announce-box::after {
+  content: "🐾";
+  position: absolute;
+  right: 12px;
+  bottom: 4px;
+  font-size: 56px;
+  opacity: 0.13;
+  transform: rotate(-12deg);
+  pointer-events: none;
+}
+
+.announce-eyebrow {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.85);
+  margin-bottom: 5px;
+}
+
+.announce-headline {
+  font-family: "Fredoka", sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.2;
+  margin-bottom: 12px;
+}
+
+.announce-date {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: rgba(255, 255, 255, 0.16);
+  border: 1.5px solid rgba(255, 255, 255, 0.35);
+  border-radius: 14px;
+  padding: 10px 16px;
+  margin-bottom: 14px;
+  position: relative;
+  z-index: 1;
+}
+
+.announce-date-day {
+  font-family: "Fredoka", sans-serif;
+  font-size: 42px;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.announce-date-rest {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+
+.announce-date-month {
+  font-family: "Fredoka", sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  color: #fff;
+  line-height: 1.1;
+}
+
+.announce-date-note {
+  font-size: 12px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.9);
+  line-height: 1.35;
+}
+
+.announce-text {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  position: relative;
+  z-index: 1;
+}
+
+.announce-text p {
+  font-size: 13.5px;
+  color: rgba(255, 255, 255, 0.95);
+  line-height: 1.6;
+  text-align: justify;
+}
+
+.announce-text p > strong {
+  color: #fff;
+  font-weight: 700;
+}
+
 .info-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -593,6 +696,78 @@ p > strong {
   left: 0;
   color: #f4845f;
   font-weight: 700;
+}
+
+.draw-highlight {
+  color: #f4845f;
+}
+
+.thanks-box {
+  background: linear-gradient(135deg, #fff5eb, #fff0e0);
+  border: 1.5px solid #f7d9bf;
+  border-radius: 18px;
+  padding: 20px;
+  margin-bottom: 20px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.thanks-title {
+  font-family: "Fredoka", sans-serif;
+  font-weight: 600;
+  font-size: 18px;
+  color: #f4845f;
+  margin-bottom: 10px;
+}
+
+.thanks-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #fffaf3;
+  border: 1.5px solid #f4845f;
+  border-radius: 30px;
+  padding: 7px 16px;
+  margin-bottom: 12px;
+  box-shadow: 0 2px 8px rgba(244, 132, 95, 0.15);
+}
+
+.thanks-status-icon {
+  font-size: 17px;
+  line-height: 1;
+}
+
+.thanks-status-text {
+  font-family: "Fredoka", sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: #3d2c1e;
+}
+
+.thanks-status-text strong {
+  color: #f4845f;
+  font-weight: 700;
+}
+
+.thanks-body {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.thanks-box p {
+  font-size: 14px;
+  color: #5a4636;
+  line-height: 1.65;
+}
+
+.thanks-signature {
+  font-family: "Fredoka", sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  color: #3d2c1e;
+  margin-top: 4px;
 }
 
 .contact-section {

@@ -81,7 +81,7 @@ function clearSelection() {
 async function sharePage(btn) {
   const data = {
     title: "🐱 Rifa Solidária — Ajude a Sasá!",
-    text: "Nossa gatinha foi diagnosticada com doença renal crônica e precisou de uma cirurgia de emergência que ultrapassou R$ 10.000. Ela já está em casa se recuperando, mas precisamos de uma forcinha! 🙏\n🔢 150 números • 💰 R$ 10 cada\n🏆 Prêmio: Cubo Mágico 7x7 Moyu Meilong V2M Magnético\n👇 Acesse, escolha seu número e faça o Pix:\n\n🔗 thalesrochas.github.io/rifa-sasa\n🔗 thalesrochas.github.io/rifa-sasa\n🔗 thalesrochas.github.io/rifa-sasa\n\nCompartilhe com os amigos! Cada número ajuda muito. 🐾♥️",
+    text: "Nossa gatinha foi diagnosticada com doença renal crônica e precisou de uma cirurgia de emergência que ultrapassou R$ 10.000. Ela já está em casa se recuperando, mas precisamos de uma forcinha! 🙏\n🔢 150 números • 💰 R$ 10 cada\n🏆 Prêmio: Cubo Mágico 7x7 Moyu Meilong V2M Magnético\n🗓️ Sorteio: 30/08/2026 pela Loteria Federal\n👇 Acesse, escolha seu número e faça o Pix:\n\n🔗 thalesrochas.github.io/rifa-sasa\n🔗 thalesrochas.github.io/rifa-sasa\n🔗 thalesrochas.github.io/rifa-sasa\n\nCompartilhe com os amigos! Cada número ajuda muito. 🐾♥️",
     url: "https://thalesrochas.github.io/rifa-sasa",
   };
 
