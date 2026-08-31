@@ -79,7 +79,56 @@
       </div>
 
       <div class="body">
-        <div class="announce-box">
+        <!-- ═══════════════════════════════════════════════════════════
+             RESULTADO DO SORTEIO
+             Fica oculto até você preencher o objeto RESULTADO no topo
+             de js/script.js. Não precisa mexer neste bloco.
+             ═══════════════════════════════════════════════════════════ -->
+        <div class="result-box" id="result-box" hidden>
+          <div class="result-eyebrow" id="result-eyebrow">
+            🎉 Sorteio realizado
+          </div>
+          <div class="result-headline" id="result-headline">
+            Temos um número vencedor!
+          </div>
+          <div class="result-number-wrap" id="result-number-wrap">
+            <span class="result-number-label">Número sorteado</span>
+            <span class="result-number" id="result-number">—</span>
+          </div>
+          <div class="result-pending" id="result-pending" hidden>
+            <span class="result-pending-icon">⏳</span>
+            <span class="result-pending-text" id="result-pending-text"></span>
+          </div>
+          <div class="result-meta">
+            <span class="result-concurso-line" id="result-concurso-line"></span>
+
+            <div class="apuracao" id="apuracao" hidden>
+              <div class="apuracao-title" id="apuracao-title">
+                Como chegamos nesse número
+              </div>
+              <div class="apuracao-steps" id="apuracao-steps"></div>
+              <div class="apuracao-nota" id="apuracao-nota" hidden></div>
+              <div class="apuracao-ref">
+                Seguindo o critério de apuração publicado antes do sorteio —
+                <a href="#draw-section" class="apuracao-ref-link"
+                  >ver a regra completa ↓</a
+                >
+              </div>
+            </div>
+
+            <a
+              class="result-link"
+              id="result-link"
+              href="https://loterias.caixa.gov.br/Paginas/Federal.aspx"
+              target="_blank"
+              rel="noopener"
+            >
+              🔍 Conferir o resultado oficial
+            </a>
+          </div>
+        </div>
+
+        <div class="announce-box" id="announce-box">
           <div class="announce-eyebrow">📢 Aviso importante</div>
           <div class="announce-headline">O sorteio já tem data!</div>
           <div class="announce-date">
@@ -174,7 +223,7 @@
           </div>
         </div>
 
-        <div class="how-to-section">
+        <div class="how-to-section" id="how-to-section">
           <div class="how-to-title">📋 Como participar</div>
           <div class="how-to-steps">
             <div class="how-to-step">
@@ -246,9 +295,14 @@
         <div class="numbers-section">
           <div class="numbers-title">🎟️ Números da Rifa</div>
           <div class="numbers-legend">
-            <span class="legend-item legend-available">Disponível</span>
+            <span class="legend-item legend-available" id="legend-available"
+              >Disponível</span
+            >
             <span class="legend-item legend-selected">Selecionado</span>
             <span class="legend-item legend-sold">Vendido</span>
+            <span class="legend-item legend-winner" id="legend-winner" hidden
+              >Vencedor</span
+            >
           </div>
           <div id="numbers-grid"></div>
           <div
@@ -270,8 +324,8 @@
           </div>
         </div>
 
-        <div class="draw-section">
-          <div class="draw-title">🎲 Como será o sorteio?</div>
+        <div class="draw-section" id="draw-section">
+          <div class="draw-title" id="draw-title">🎲 Como será o sorteio?</div>
           <div class="draw-info">
             <div class="draw-item">
               <span class="draw-label">Quando</span>
@@ -415,6 +469,11 @@
             <button class="share-btn" onclick="sharePage(this)">
               🔗 Compartilhar esta página
             </button>
+          </div>
+          <div class="closed-note" id="closed-note" hidden>
+            🔒 As vendas foram encerradas — o sorteio já foi realizado. Se você
+            é o ganhador, entraremos em contato pelo WhatsApp que você usou para
+            enviar o comprovante.
           </div>
         </div>
       </div>
