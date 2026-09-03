@@ -44,6 +44,11 @@ const RESULTADO = {
       data: "30/08/2026",
       premios: ["008932", "049314", "017181", "010373", "047859"],
     },
+    {
+      concurso: "6097",
+      data: "02/09/2026",
+      premios: ["", "", "", "", ""],
+    },
   ],
 
   // Enquanto numero for null: qual o próximo concurso da apuração.
@@ -213,7 +218,13 @@ function renderApuracao() {
   for (const rodada of rodadas) {
     if (achouVencedor) break;
 
-    const premios = Array.isArray(rodada.premios) ? rodada.premios : [];
+    // Só entram rodadas com prêmios preenchidos. Uma rodada já cadastrada
+    // mas ainda não sorteada fica de fora até você colar os números.
+    const premios = (Array.isArray(rodada.premios) ? rodada.premios : [])
+      .map(p => String(p).replace(/\D/g, ""))
+      .filter(p => p !== "");
+    if (premios.length === 0) continue;
+
     const grupo = document.createElement("div");
     grupo.className = "apuracao-rodada";
 
@@ -227,9 +238,7 @@ function renderApuracao() {
     }
 
     for (let i = 0; i < premios.length; i++) {
-      const bruto = String(premios[i]).replace(/\D/g, "");
-      if (!bruto) continue;
-
+      const bruto = premios[i];
       const digitos = bruto.slice(-3).padStart(3, "0");
       const num = parseInt(digitos, 10);
       const venceu = temVencedor() && num === RESULTADO.numero;
