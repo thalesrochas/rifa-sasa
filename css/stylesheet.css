@@ -319,6 +319,17 @@ p > strong {
   margin-bottom: 12px;
 }
 
+.apuracao-history {
+  font-size: 12px;
+  font-style: italic;
+  line-height: 1.5;
+  color: rgba(255, 250, 243, 0.55);
+  text-align: center;
+  margin-bottom: 14px;
+  padding-bottom: 12px;
+  border-bottom: 1px dashed rgba(249, 200, 138, 0.2);
+}
+
 .apuracao-rodada + .apuracao-rodada {
   margin-top: 16px;
   padding-top: 14px;

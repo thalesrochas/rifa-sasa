@@ -202,7 +202,18 @@ function renderApuracao() {
   const lista = document.getElementById("apuracao-steps");
   if (!wrap || !lista) return;
 
-  const rodadas = Array.isArray(RESULTADO.rodadas) ? RESULTADO.rodadas : [];
+  // Só entram rodadas com prêmios preenchidos. Uma rodada já cadastrada
+  // mas ainda não sorteada fica de fora até você colar os números.
+  const rodadas = (Array.isArray(RESULTADO.rodadas) ? RESULTADO.rodadas : [])
+    .map(r => ({
+      concurso: r.concurso,
+      data: r.data,
+      premios: (Array.isArray(r.premios) ? r.premios : [])
+        .map(p => String(p).replace(/\D/g, ""))
+        .filter(p => p !== ""),
+    }))
+    .filter(r => r.premios.length > 0);
+
   const nota = (RESULTADO.nota || "").trim();
   if (rodadas.length === 0 && nota === "") return;
 
@@ -212,19 +223,54 @@ function renderApuracao() {
   }
 
   const faixa = `001–${String(TOTAL_NUMBERS).padStart(3, "0")}`;
-  lista.innerHTML = "";
+
+  // A rodada que decide a apuração: a que tem o vencedor ou, enquanto
+  // não houver um, a última cadastrada.
+  let finalIdx = rodadas.length - 1;
   let achouVencedor = false;
+  if (temVencedor()) {
+    for (let i = 0; i < rodadas.length; i++) {
+      if (
+        rodadas[i].premios.some(
+          p => parseInt(p.slice(-3), 10) === RESULTADO.numero,
+        )
+      ) {
+        finalIdx = i;
+        achouVencedor = true;
+        break;
+      }
+    }
+  }
 
-  for (const rodada of rodadas) {
-    if (achouVencedor) break;
+  // O cartaz (formato fixo de Stories) só tem espaço para uma rodada em
+  // detalhe. Rodadas anteriores à decisiva entram resumidas numa linha
+  // só — no site (que pode rolar) o histórico completo continua saindo.
+  const compacto = document.body.classList.contains("is-poster");
+  const primeiraExibida = compacto ? Math.max(finalIdx, 0) : 0;
 
-    // Só entram rodadas com prêmios preenchidos. Uma rodada já cadastrada
-    // mas ainda não sorteada fica de fora até você colar os números.
-    const premios = (Array.isArray(rodada.premios) ? rodada.premios : [])
-      .map(p => String(p).replace(/\D/g, ""))
-      .filter(p => p !== "");
-    if (premios.length === 0) continue;
+  lista.innerHTML = "";
 
+  if (compacto && rodadas.length > 0 && finalIdx > 0) {
+    const anteriores = rodadas
+      .slice(0, finalIdx)
+      .map(r => r.concurso)
+      .filter(Boolean);
+    const resumo = document.createElement("div");
+    resumo.className = "apuracao-history";
+    resumo.textContent =
+      (anteriores.length === 1
+        ? `Concurso ${anteriores[0]}`
+        : `Concursos ${anteriores.join(", ")}`) +
+      " — nenhum prêmio caiu em número vendido. Seguimos adiante:";
+    lista.appendChild(resumo);
+  }
+
+  for (
+    let idx = primeiraExibida;
+    idx <= finalIdx && idx < rodadas.length;
+    idx++
+  ) {
+    const rodada = rodadas[idx];
     const grupo = document.createElement("div");
     grupo.className = "apuracao-rodada";
 
@@ -237,8 +283,9 @@ function renderApuracao() {
       grupo.appendChild(cab);
     }
 
-    for (let i = 0; i < premios.length; i++) {
-      const bruto = premios[i];
+    let venceuNestaRodada = false;
+    for (let i = 0; i < rodada.premios.length; i++) {
+      const bruto = rodada.premios[i];
       const digitos = bruto.slice(-3).padStart(3, "0");
       const num = parseInt(digitos, 10);
       const venceu = temVencedor() && num === RESULTADO.numero;
@@ -246,7 +293,7 @@ function renderApuracao() {
       let veredito;
       if (venceu) {
         veredito = `Número ${num}, vendido — é o vencedor! 🏆`;
-        achouVencedor = true;
+        venceuNestaRodada = true;
       } else if (num >= 1 && num <= TOTAL_NUMBERS) {
         veredito = `Número ${num} não foi vendido — vamos para o próximo prêmio`;
       } else {
@@ -271,7 +318,7 @@ function renderApuracao() {
     }
 
     // Rodada fechou sem vencedor: pela regra, vai para o concurso seguinte
-    if (!achouVencedor && premios.length > 0) {
+    if (!venceuNestaRodada && rodada.premios.length > 0) {
       const fim = document.createElement("div");
       fim.className = "apuracao-rodada-end";
       fim.textContent =

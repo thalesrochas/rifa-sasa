@@ -186,6 +186,12 @@
         margin-bottom: 9px;
       }
 
+      .poster .apuracao-history {
+        font-size: 11.5px;
+        margin-bottom: 10px;
+        padding-bottom: 9px;
+      }
+
       .poster .apuracao-step {
         padding: 5px 10px;
       }
@@ -261,10 +267,13 @@
       }
     </style>
   </head>
-  <body>
+  <body class="is-poster">
     <p class="hint">
       Este cartaz lê os mesmos dados de <code>RESULTADO</code> em
       <code>js/script.js</code> — atualizou lá, atualizou aqui.<br />
+      Se houver mais de uma rodada, só a decisiva aparece em detalhe; as
+      anteriores entram resumidas numa linha (o histórico completo fica no
+      site, que pode rolar à vontade).<br />
       Para exportar a imagem: F12 → selecione a div
       <code>.poster</code> → ⋮ → <em>Capture node screenshot</em>
     </p>
