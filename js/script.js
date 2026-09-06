@@ -49,12 +49,17 @@ const RESULTADO = {
       data: "02/09/2026",
       premios: ["030921", "024230", "071189", "002173", "057347"],
     },
+    {
+      concurso: "6098",
+      data: "06/09/2026",
+      premios: ["048337", "065904", "007642", "065308", "038572"],
+    },
   ],
 
   // Enquanto numero for null: qual o próximo concurso da apuração.
   // Se você ainda não souber, deixe os dois campos como "" — a página
   // fala só em "próximo concurso da Loteria Federal".
-  proxima: { concurso: "6098", data: "06/09/2026" },
+  proxima: { concurso: "6099", data: "09/09/2026" },
 
   // Observação livre, se algo fugir do padrão. Se preenchida, aparece
   // no lugar da mensagem automática.
