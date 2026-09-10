@@ -1,0 +1,410 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Cartaz — Temos um vencedor!</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Quicksand:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        background: #f0e6d6;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 32px 16px 48px;
+        font-family: "Fredoka", sans-serif;
+      }
+
+      .hint {
+        color: #7a6352;
+        font-family: "Quicksand", sans-serif;
+        font-size: 12px;
+        font-weight: 600;
+        margin-bottom: 20px;
+        text-align: center;
+        line-height: 1.7;
+      }
+
+      /* ══════════════ POSTER ══════════════ */
+      /* 540 × 960 → exportado em 2x vira 1080 × 1920 (Stories).
+         O fundo sangra até as bordas, mas o conteúdo fica dentro da
+         área segura: o Instagram cobre o topo com o perfil e o rodapé
+         com a barra de mensagem. */
+      .poster {
+        width: 540px;
+        height: 960px;
+        background: #fffaf3;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        box-shadow: 0 16px 64px rgba(0, 0, 0, 0.24);
+        position: relative;
+      }
+
+      /* top stripe — idêntico ao site */
+      .poster::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 5px;
+        background: linear-gradient(90deg, #f4845f, #f9a870, #f4845f);
+        z-index: 30;
+      }
+
+      /* ══ HEADER ══ */
+      .ph {
+        background: linear-gradient(
+          135deg,
+          #fce4c7 0%,
+          #fdd6a8 50%,
+          #f9c88a 100%
+        );
+        /* 128px no topo = fora da faixa do perfil no Stories */
+        padding: 128px 28px 16px;
+        text-align: center;
+        position: relative;
+        flex-shrink: 0;
+      }
+
+      .ph-paws-r {
+        position: absolute;
+        top: 124px;
+        right: 18px;
+        font-size: 22px;
+        opacity: 0.3;
+        transform: rotate(-15deg);
+      }
+
+      .ph-paws-l {
+        position: absolute;
+        top: 130px;
+        left: 16px;
+        font-size: 16px;
+        opacity: 0.22;
+        transform: rotate(20deg);
+      }
+
+      .ph-badge {
+        display: inline-block;
+        background: #3d2c1e;
+        color: #f9c88a;
+        font-family: "Fredoka", sans-serif;
+        font-weight: 600;
+        font-size: 12px;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        padding: 5px 16px;
+        border-radius: 30px;
+        margin-bottom: 8px;
+      }
+
+      .ph-title {
+        font-family: "Fredoka", sans-serif;
+        font-size: 38px;
+        font-weight: 700;
+        color: #3d2c1e;
+        line-height: 1.05;
+        margin-bottom: 4px;
+      }
+
+      .ph-title span {
+        color: #f4845f;
+      }
+
+      .ph-sub {
+        font-family: "Quicksand", sans-serif;
+        font-size: 13px;
+        font-weight: 600;
+        color: #7a6352;
+      }
+
+      /* ══ FOTO — full-bleed, flex:1 ══ */
+      .photo-section {
+        flex: 1;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .photo-section img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center 25%;
+        display: block;
+      }
+
+      .photo-section::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 68%;
+        background: linear-gradient(
+          to top,
+          rgba(61, 44, 30, 0.94) 0%,
+          transparent 100%
+        );
+      }
+
+      .photo-caption {
+        position: absolute;
+        bottom: 20px;
+        left: 28px;
+        right: 28px;
+        z-index: 2;
+        color: rgba(255, 250, 243, 0.85);
+        font-family: "Quicksand", sans-serif;
+        font-size: 13.5px;
+        font-weight: 600;
+        line-height: 1.6;
+      }
+
+      .photo-caption strong {
+        color: #f9c88a;
+        font-weight: 700;
+      }
+
+      .photo-caption p + p {
+        margin-top: 7px;
+      }
+
+      /* ══ CARDS ══ */
+      .cards {
+        flex-shrink: 0;
+        padding: 14px 22px 16px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        background: #fffaf3;
+      }
+
+      .cards-row {
+        display: flex;
+        gap: 10px;
+        align-items: stretch;
+      }
+
+      /* vendas encerradas — dark brown idêntico ao site */
+      .closed-card {
+        flex: 1;
+        background: linear-gradient(135deg, #3d2c1e, #5a4030);
+        border-radius: 18px;
+        padding: 18px 14px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        gap: 6px;
+        min-width: 0;
+      }
+
+      .closed-icon {
+        font-size: 30px;
+        line-height: 1;
+      }
+
+      .closed-eyebrow {
+        font-family: "Quicksand", sans-serif;
+        font-size: 9.5px;
+        font-weight: 700;
+        letter-spacing: 1.3px;
+        text-transform: uppercase;
+        color: #f9c88a;
+      }
+
+      .closed-title {
+        font-family: "Fredoka", sans-serif;
+        font-size: 19px;
+        font-weight: 600;
+        color: #fffaf3;
+        line-height: 1.15;
+      }
+
+      .closed-date {
+        font-family: "Quicksand", sans-serif;
+        font-size: 11px;
+        font-weight: 700;
+        color: rgba(255, 250, 243, 0.7);
+      }
+
+      /* vencedor — coral idêntico ao site, número em destaque */
+      .winner-card {
+        flex: 1;
+        background: linear-gradient(135deg, #f4845f, #f9a870);
+        border-radius: 18px;
+        padding: 12px 12px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        gap: 2px;
+        min-width: 0;
+      }
+
+      .winner-icon {
+        font-size: 26px;
+        line-height: 1;
+        margin-bottom: 2px;
+      }
+
+      .winner-eyebrow {
+        font-family: "Quicksand", sans-serif;
+        font-size: 9.5px;
+        font-weight: 700;
+        letter-spacing: 1.3px;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.9);
+      }
+
+      .winner-number {
+        font-family: "Fredoka", sans-serif;
+        font-size: 40px;
+        font-weight: 700;
+        color: #fff;
+        line-height: 1.05;
+        margin: 1px 0;
+      }
+
+      .winner-note {
+        font-family: "Quicksand", sans-serif;
+        font-size: 11px;
+        font-weight: 700;
+        color: rgba(255, 255, 255, 0.92);
+        line-height: 1.3;
+      }
+
+      /* ══ FOOTER ══ */
+      .footer-strip {
+        background: linear-gradient(90deg, #f4845f, #f9a870);
+        /* 120px embaixo = fora da barra de mensagem do Stories */
+        padding: 14px 20px 120px;
+        text-align: center;
+        font-family: "Fredoka", sans-serif;
+        color: #fff;
+        flex-shrink: 0;
+      }
+
+      .footer-label {
+        font-family: "Quicksand", sans-serif;
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 1.4px;
+        text-transform: uppercase;
+        opacity: 0.9;
+        margin-bottom: 2px;
+      }
+
+      .footer-url {
+        font-size: 16px;
+        font-weight: 600;
+        letter-spacing: 0.3px;
+      }
+
+      /* ══ IMPRESSÃO ══ */
+      @media print {
+        @page {
+          size: 143mm 254mm;
+          margin: 0;
+        }
+
+        html,
+        body {
+          background: #fff;
+          padding: 0;
+          margin: 0;
+        }
+
+        .hint {
+          display: none !important;
+        }
+
+        .poster {
+          width: 143mm;
+          height: 254mm;
+          box-shadow: none;
+          page-break-inside: avoid;
+        }
+
+        * {
+          -webkit-print-color-adjust: exact !important;
+          print-color-adjust: exact !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <p class="hint">
+      Formato <strong>Stories</strong> — 540 × 960, exportado em 2x vira 1080 ×
+      1920.<br />
+      Para exportar: Chrome → F12 → selecione <strong>.poster</strong> → ⋮ →
+      <em>Capture node screenshot</em>
+    </p>
+
+    <div class="poster">
+      <!-- HEADER -->
+      <div class="ph">
+        <div class="ph-paws-r">🐾🐾</div>
+        <div class="ph-paws-l">🐾</div>
+        <div class="ph-badge">🏆 Temos um vencedor!</div>
+        <div class="ph-title">Rifa da <span>Sasá</span> 🐱</div>
+        <div class="ph-sub">O resultado saiu — confira quem ganhou! 🎉</div>
+      </div>
+
+      <!-- FOTO FULL-BLEED -->
+      <div class="photo-section">
+        <img src="img/foto4.jpg" alt="Sasá recuperada" />
+        <div class="photo-caption">
+          <p>
+            As vendas foram <strong>encerradas em 30/08</strong> e a rifa foi
+            sorteada pela Loteria Federal. Obrigado a todo mundo que participou!
+            🐾
+          </p>
+          <p>
+            Depois de <strong>4 concursos</strong>, saiu um número vendido: o
+            <strong>68</strong> é o grande vencedor! 🎉 O ganhador será avisado
+            por WhatsApp — confira o passo a passo completo da apuração no site.
+          </p>
+        </div>
+      </div>
+
+      <!-- CARDS -->
+      <div class="cards">
+        <div class="cards-row">
+          <div class="closed-card">
+            <div class="closed-icon">🔒</div>
+            <div class="closed-eyebrow">Vendas</div>
+            <div class="closed-title">Encerradas</div>
+            <div class="closed-date">30 de agosto</div>
+          </div>
+
+          <div class="winner-card">
+            <div class="winner-icon">🏆</div>
+            <div class="winner-eyebrow">Número vencedor</div>
+            <div class="winner-number">68</div>
+            <div class="winner-note">Concurso 6099<br />09/09/2026</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- FOOTER -->
+      <div class="footer-strip">
+        <div class="footer-label">Passo a passo da apuração em</div>
+        <div class="footer-url">thalesrochas.github.io/rifa-sasa</div>
+      </div>
+    </div>
+  </body>
+</html>

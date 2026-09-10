@@ -25,7 +25,7 @@ const RESULTADO = {
   realizado: true,
 
   // Número vencedor. Deixe null enquanto a apuração não fechar.
-  numero: null,
+  numero: 68,
 
   // Data em que a rifa foi sorteada.
   data: "30/08/2026",
@@ -54,12 +54,17 @@ const RESULTADO = {
       data: "06/09/2026",
       premios: ["048337", "065904", "007642", "065308", "038572"],
     },
+    {
+      concurso: "6099",
+      data: "09/09/2026",
+      premios: ["064423", "083481", "037422", "027068", "057566"],
+    },
   ],
 
   // Enquanto numero for null: qual o próximo concurso da apuração.
   // Se você ainda não souber, deixe os dois campos como "" — a página
   // fala só em "próximo concurso da Loteria Federal".
-  proxima: { concurso: "6099", data: "09/09/2026" },
+  proxima: { concurso: "", data: "" },
 
   // Observação livre, se algo fugir do padrão. Se preenchida, aparece
   // no lugar da mensagem automática.
